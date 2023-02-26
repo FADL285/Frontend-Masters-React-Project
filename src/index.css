@@ -86,16 +86,14 @@ body {
   text-overflow: ellipsis;
 }
 
-header > a,
-#root > div > h1 {
-  display: inline-block;
+header > a {
   background-image: url("https://static.frontendmasters.com/resources/2019-05-02-complete-intro-react-v5/image-logo.png");
   filter: brightness(150%);
   width: 279px;
   height: 76px;
   overflow: hidden;
   text-indent: -9999px;
-  margin: 20px 0;
+  margin: 20px auto;
 }
 
 .pet h2 {
