@@ -217,6 +217,11 @@ header {
   border: 1px solid cornflowerblue;
 }
 
+.text-center {
+  text-align: center;
+  padding-inline: 1rem;
+}
+
 #modal {
   background-color: rgba(0, 0, 0, 0.9);
   position: fixed;

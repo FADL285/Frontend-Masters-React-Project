@@ -18,8 +18,6 @@ const SearchParams = () => {
   const results = useQuery(["search", requestParams], fetchSearch);
   const pets = results?.data?.pets ?? [];
 
-  console.log(results);
-
   const handleFormSubmission = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
