@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useBreadList from "../hooks/useBreadList.js";
 import { useQuery } from "@tanstack/react-query";
 import fetchSearch from "../api/fetchSearch.js";
-import Results from "./Results.jsx";
+import Results from "../components/Results.jsx";
+import AdoptedPetContext from "../contexts/AdoptedPetContext.js";
 
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
@@ -14,6 +15,7 @@ const SearchParams = () => {
   });
   const [animal, setAnimal] = useState("");
   const [breeds] = useBreadList(animal);
+  const [adoptedPet] = useContext(AdoptedPetContext);
 
   const results = useQuery(["search", requestParams], fetchSearch);
   const pets = results?.data?.pets ?? [];
@@ -32,6 +34,11 @@ const SearchParams = () => {
   return (
     <div className="search-params">
       <form onSubmit={handleFormSubmission}>
+        {adoptedPet ? (
+          <div className="pet image-container">
+            <img src={adoptedPet.images[0]} alt={adoptedPet.name} />
+          </div>
+        ) : null}
         <label htmlFor="location">
           Location
           <input id="location" name="location" placeholder="Location" />
@@ -61,7 +68,12 @@ const SearchParams = () => {
         </label>
         <label htmlFor="breed">
           Breed
-          <select id="breed" name="breed" disabled={!breeds.length}>
+          <select
+            id="breed"
+            defaultValue=""
+            name="breed"
+            disabled={!breeds.length}
+          >
             <option value="" disabled hidden>
               Select a breed
             </option>
