@@ -1,11 +1,12 @@
+import { useContext, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import fetchPet from "../api/fetchPet.js";
 import Carousel from "../components/Carousel.jsx";
 import ErrorBoundary from "../components/ErrorBoundary.jsx";
-import { useContext, useState } from "react";
 import Modal from "../components/Modal.jsx";
 import AdoptedPetContext from "../contexts/AdoptedPetContext.js";
+import Loader from "../components/Loader.jsx";
 
 const Details = () => {
   const { id } = useParams();
@@ -15,11 +16,7 @@ const Details = () => {
   const navigate = useNavigate();
 
   if (results.isLoading) {
-    return (
-      <div className="loading-pane">
-        <h2 className="loader">🌀</h2>
-      </div>
-    );
+    return <Loader />;
   }
 
   if (results.data.numberOfResults === 0) {
